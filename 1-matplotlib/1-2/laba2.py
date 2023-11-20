@@ -16,8 +16,7 @@ with open("1.txt") as f:
         colors = [list(bc.keys())[i] for i in num_set]
     
     
-        plt.scatter(X, Y, alpha=0.5, c="r", s=40)
-        plt.scatter(X, Y, alpha=0.4, c=colors, linewidths=2, edgecolors="face", s = 7)
+        plt.plot(X, Y, c="r")
         plt.xlabel('x label')
         plt.ylabel('y label')
         m+=1
@@ -26,7 +25,6 @@ with open("1.txt") as f:
         plt.xlim([-1, 17])
         plt.ylim([-12, 14])
         plt.yticks(list(range(-12, 14, 2)))
-        plt.legend()
         
         plt.savefig("pic" + str(m) +".jpg")
         plt.show()

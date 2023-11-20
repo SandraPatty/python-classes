@@ -15,7 +15,7 @@ for i in files:
     X = []
     Y = []
     N = "a"
-    s = "dead_moroz" + "/" + str(i)
+    s = os.path.join(directory, str(i))
     with open(s) as f:
         lines = f.readlines()
         N = int(lines[0])
@@ -33,8 +33,6 @@ for i in files:
     plt.xlabel('x label')
     plt.ylabel('y label')
     plt.title("Number of points " + str(N))
-
-    plt.legend()
 
     m+=1
     plt.gca().set_aspect('equal')

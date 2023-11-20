@@ -1,29 +1,32 @@
 import array
 import matplotlib.pyplot as plt
+import numpy as np
 
 font_color = 'sienna'
 colors=['#FFEBCD', '#FFDEAD', '#F4A460', '#FFA07A', '#FF7F50', 
 '#FF6347', '#CD5C5C', '#DC143C']
-colorss = ['coral', '#f7ecb0', '#ffb3e6', '#99ff99', '#66b3ff', '#c7b3fb','#ff6666', '#f9c3b7']
+
 with open("students.txt") as f:
     
-    lines = [ i.replace('\n', '').split(";") for i in f.readlines()]
+    lines = [i.split()[0].split(';') for i in f.readlines()]
+    print(lines)
     preps = sorted(set(lines[i][0] for i in range(len(lines))))
     groups = sorted(set(lines[i][1] for i in range(len(lines))))
     marks = sorted(set(int(lines[i][2]) for i in range(len(lines))))
+    print(marks)
     
     
     fig, axes = plt.subplots(3, 3, figsize=(7, 10), facecolor='#e8f4f0')
-    fig.delaxes(ax= axes[2,2])
-    fig.delaxes(ax= axes[1,2])
-    M = [0]*len(preps)
+    fig.delaxes(ax=axes[2,2])
+    fig.delaxes(ax=axes[1,2])
+    M = [0] * len(preps)
     for i in range(len(preps)):
         s = 0
-        M[i] = [0]*(max(marks)+1)
-        labels = [" "]*(max(marks)+1)
+        M[i] = [0]*(len(marks))
+        labels = [" "]*(len(marks))
         for k in range(len(lines)):
             if lines[k][0] == preps[i]: 
-                a = int(lines[k][2])
+                a = int(lines[k][2]) - 3
                 s+=1
                 M[i][a] += 1
                 labels[a] = M[i][a]
@@ -36,7 +39,7 @@ with open("students.txt") as f:
             
         ax.set_title(preps[i], fontsize=10, color=font_color, fontweight='bold')
         
-        legend = plt.legend(marks, 
+        legend = plt.legend(np.roll(np.array(marks), 0), 
                                 prop = { "size": 18 },
                                 bbox_to_anchor=(1.5, 2.2), # Legend position
                                 loc='upper left',  
@@ -55,15 +58,15 @@ with open("students.txt") as f:
     
     fig, axes = plt.subplots(2, 3, figsize=(8, 8), facecolor='#e8f4f0')
  
-    M = [0]*len(groups)
+    M = [0] * len(groups)
     for i in range(len(groups)):
         s = 0
-        M[i] = [0]*(max(marks)+1)
-        labels = [" "]*(max(marks)+1)
+        M[i] = [0]*(len(marks))
+        labels = [" "]*(len(marks))
         for k in range(len(lines)):
             if lines[k][1] == groups[i]: 
-                a = int(lines[k][2])
-                s+=1
+                a = int(lines[k][2]) - 3
+                s += 1
                 M[i][a] += 1
                 labels[a] = M[i][a]
     
