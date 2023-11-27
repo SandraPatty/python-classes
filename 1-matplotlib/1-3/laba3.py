@@ -39,7 +39,7 @@ with open("students.txt") as f:
             
         ax.set_title(preps[i], fontsize=10, color=font_color, fontweight='bold')
         
-        legend = plt.legend(np.roll(np.array(marks), 0), 
+        legend = plt.legend(marks, 
                                 prop = { "size": 18 },
                                 bbox_to_anchor=(1.5, 2.2), # Legend position
                                 loc='upper left',  
